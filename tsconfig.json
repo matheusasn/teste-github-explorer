@@ -9,7 +9,8 @@
       "@domain/*": ["src/domain/*"],
       "@application/*": ["src/application/*"],
       "@infrastructure/*": ["src/infrastructure/*"],
-      "@presentation/*": ["src/presentation/*"]
+      "@presentation/*": ["src/presentation/*"],
+      "@test-utils/*": ["src/test-utils/*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"],

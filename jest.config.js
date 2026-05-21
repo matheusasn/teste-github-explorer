@@ -6,6 +6,7 @@ module.exports = {
     '^@application/(.*)$': '<rootDir>/src/application/$1',
     '^@infrastructure/(.*)$': '<rootDir>/src/infrastructure/$1',
     '^@presentation/(.*)$': '<rootDir>/src/presentation/$1',
+    '^@test-utils/(.*)$': '<rootDir>/src/test-utils/$1',
   },
   testPathIgnorePatterns: ['/node_modules/', '/ios/', '/android/', '/.expo/'],
   collectCoverageFrom: [

@@ -12,6 +12,7 @@ module.exports = function (api) {
             '@application': './src/application',
             '@infrastructure': './src/infrastructure',
             '@presentation': './src/presentation',
+            '@test-utils': './src/test-utils',
           },
         },
       ],
