@@ -101,7 +101,7 @@ export default [
 
   // ─── Tests can violate boundaries (need mocks/fakes) ──────────────────────
   {
-    files: ['**/*.test.{ts,tsx}', '**/__tests__/**/*.{ts,tsx}'],
+    files: ['**/*.test.{ts,tsx}'],
     rules: {
       'no-restricted-imports': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
