@@ -35,6 +35,15 @@ export class NotFoundError extends Error {
   }
 }
 
+export class UnauthorizedError extends Error {
+  readonly kind = 'unauthorized' as const;
+
+  constructor() {
+    super('Token de acesso inválido ou expirado. Verifique seu .env.');
+    this.name = 'UnauthorizedError';
+  }
+}
+
 export class UnknownApiError extends Error {
   readonly kind = 'unknown' as const;
 
@@ -44,10 +53,16 @@ export class UnknownApiError extends Error {
   }
 }
 
-export type GitHubError = RateLimitError | NetworkError | NotFoundError | UnknownApiError;
+export type GitHubError =
+  | RateLimitError
+  | NetworkError
+  | NotFoundError
+  | UnauthorizedError
+  | UnknownApiError;
 
 export const isGitHubError = (e: unknown): e is GitHubError =>
   e instanceof RateLimitError ||
   e instanceof NetworkError ||
   e instanceof NotFoundError ||
+  e instanceof UnauthorizedError ||
   e instanceof UnknownApiError;

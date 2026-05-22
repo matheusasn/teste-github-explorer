@@ -53,3 +53,16 @@ export interface GitHubSearchResponse {
   total_count: number;
   items: GitHubApiRepo[];
 }
+
+export interface GitHubApiUser {
+  id: number;
+  login: string;
+  name: string | null;
+  avatar_url: string;
+  bio: string | null;
+  location: string | null;
+  html_url: string;
+  public_repos: number;
+  followers: number;
+  following: number;
+}

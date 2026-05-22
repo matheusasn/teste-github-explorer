@@ -12,11 +12,16 @@ import {
   createGetRepoIssuesUseCase,
   type GetRepoIssuesUseCase,
 } from '@application/use-cases/GetRepoIssuesUseCase';
+import {
+  createGetAuthenticatedUserUseCase,
+  type GetAuthenticatedUserUseCase,
+} from '@application/use-cases/GetAuthenticatedUserUseCase';
 
 export interface Container {
   searchReposUseCase: SearchReposUseCase;
   getRepoDetailsUseCase: GetRepoDetailsUseCase;
   getRepoIssuesUseCase: GetRepoIssuesUseCase;
+  getAuthenticatedUserUseCase: GetAuthenticatedUserUseCase;
 }
 
 /**
@@ -37,6 +42,7 @@ export function createContainer(
     searchReposUseCase: createSearchReposUseCase(repository),
     getRepoDetailsUseCase: createGetRepoDetailsUseCase(repository),
     getRepoIssuesUseCase: createGetRepoIssuesUseCase(repository),
+    getAuthenticatedUserUseCase: createGetAuthenticatedUserUseCase(repository),
   };
 }
 

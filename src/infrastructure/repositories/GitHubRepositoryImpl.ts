@@ -1,11 +1,18 @@
 import type { IGitHubRepository, PaginatedResult } from '@domain/repositories/IGitHubRepository';
 import type { Repo } from '@domain/entities/Repo';
 import type { Issue } from '@domain/entities/Issue';
+import type { User } from '@domain/entities/User';
 import { apiGet } from '@infrastructure/http/apiHelpers';
 import { translateHttpError } from '@infrastructure/http/errorTranslator';
 import { mapRepo } from '@infrastructure/mappers/repoMapper';
 import { mapIssue } from '@infrastructure/mappers/issueMapper';
-import type { GitHubApiIssue, GitHubApiRepo, GitHubSearchResponse } from './types/githubApiTypes';
+import { mapUser } from '@infrastructure/mappers/userMapper';
+import type {
+  GitHubApiIssue,
+  GitHubApiRepo,
+  GitHubApiUser,
+  GitHubSearchResponse,
+} from './types/githubApiTypes';
 
 /**
  * Tamanho fixo de cada página de resultado. Não exponho como parâmetro
@@ -72,6 +79,15 @@ export class GitHubRepositoryImpl implements IGitHubRepository {
         items: data.map(mapIssue),
         hasNextPage: data.length === PER_PAGE,
       };
+    } catch (error) {
+      translateHttpError(error);
+    }
+  }
+
+  async getAuthenticatedUser(): Promise<User> {
+    try {
+      const data = await apiGet<GitHubApiUser>('/user');
+      return mapUser(data);
     } catch (error) {
       translateHttpError(error);
     }

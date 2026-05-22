@@ -3,6 +3,7 @@ import {
   RateLimitError,
   NetworkError,
   NotFoundError,
+  UnauthorizedError,
   UnknownApiError,
 } from '@domain/errors/GitHubErrors';
 
@@ -26,6 +27,7 @@ export function translateHttpError(error: unknown): never {
     if (!error.response) throw new NetworkError();
 
     const status = error.response.status;
+    if (status === 401) throw new UnauthorizedError();
     if (status === 403 || status === 429) throw new RateLimitError();
     if (status === 404) throw new NotFoundError();
 

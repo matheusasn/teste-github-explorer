@@ -4,6 +4,7 @@ import {
   RateLimitError,
   NetworkError,
   NotFoundError,
+  UnauthorizedError,
   UnknownApiError,
 } from '@domain/errors/GitHubErrors';
 
@@ -38,6 +39,10 @@ describe('translateHttpError', () => {
 
   it('traduz status 429 pra RateLimitError', () => {
     expect(() => translateHttpError(makeAxiosError({ status: 429 }))).toThrow(RateLimitError);
+  });
+
+  it('traduz status 401 pra UnauthorizedError', () => {
+    expect(() => translateHttpError(makeAxiosError({ status: 401 }))).toThrow(UnauthorizedError);
   });
 
   it('traduz status 404 pra NotFoundError', () => {

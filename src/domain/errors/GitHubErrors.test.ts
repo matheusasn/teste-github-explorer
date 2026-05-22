@@ -2,6 +2,7 @@ import {
   RateLimitError,
   NetworkError,
   NotFoundError,
+  UnauthorizedError,
   UnknownApiError,
   isGitHubError,
   type GitHubError,
@@ -79,6 +80,8 @@ describe('GitHubErrors', () => {
             return 'net';
           case 'not-found':
             return 'nf';
+          case 'unauthorized':
+            return 'auth';
           case 'unknown':
             return 'unk';
           default: {
@@ -91,6 +94,7 @@ describe('GitHubErrors', () => {
       expect(describeError(new RateLimitError())).toBe('rate');
       expect(describeError(new NetworkError())).toBe('net');
       expect(describeError(new NotFoundError())).toBe('nf');
+      expect(describeError(new UnauthorizedError())).toBe('auth');
       expect(describeError(new UnknownApiError(500))).toBe('unk');
     });
   });

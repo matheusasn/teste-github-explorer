@@ -12,9 +12,11 @@ export type IssueId = Brand<number, 'IssueId'>;
 export type IssueNumber = Brand<number, 'IssueNumber'>;
 export type LabelId = Brand<number, 'LabelId'>;
 export type OwnerId = Brand<number, 'OwnerId'>;
+export type UserId = Brand<number, 'UserId'>;
 
 export const repoId = (n: number): RepoId => n as RepoId;
 export const issueId = (n: number): IssueId => n as IssueId;
 export const issueNumber = (n: number): IssueNumber => n as IssueNumber;
 export const labelId = (n: number): LabelId => n as LabelId;
 export const ownerId = (n: number): OwnerId => n as OwnerId;
+export const userId = (n: number): UserId => n as UserId;

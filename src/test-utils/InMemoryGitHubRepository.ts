@@ -1,6 +1,7 @@
 import type { IGitHubRepository, PaginatedResult } from '@domain/repositories/IGitHubRepository';
 import type { Repo } from '@domain/entities/Repo';
 import type { Issue } from '@domain/entities/Issue';
+import type { User } from '@domain/entities/User';
 
 type SearchCall = { query: string; page: number };
 type DetailsCall = { owner: string; repoName: string };
@@ -29,16 +30,22 @@ export class InMemoryGitHubRepository implements IGitHubRepository {
     hasNextPage: false,
   };
 
-  private errors: Partial<Record<'searchRepos' | 'getRepoDetails' | 'getRepoIssues', Error>> = {};
+  private nextUser: User | null = null;
+
+  private errors: Partial<
+    Record<'searchRepos' | 'getRepoDetails' | 'getRepoIssues' | 'getAuthenticatedUser', Error>
+  > = {};
 
   readonly calls: {
     searchRepos: SearchCall[];
     getRepoDetails: DetailsCall[];
     getRepoIssues: IssuesCall[];
+    getAuthenticatedUser: number;
   } = {
     searchRepos: [],
     getRepoDetails: [],
     getRepoIssues: [],
+    getAuthenticatedUser: 0,
   };
 
   setSearchResult(result: PaginatedResult<Repo>) {
@@ -51,6 +58,10 @@ export class InMemoryGitHubRepository implements IGitHubRepository {
 
   setIssuesResult(result: PaginatedResult<Issue>) {
     this.nextIssuesResult = result;
+  }
+
+  setAuthenticatedUser(user: User) {
+    this.nextUser = user;
   }
 
   /** Faz a próxima chamada do método informado lançar o erro. */
@@ -81,5 +92,14 @@ export class InMemoryGitHubRepository implements IGitHubRepository {
     this.calls.getRepoIssues.push({ owner, repoName, page });
     if (this.errors.getRepoIssues) throw this.errors.getRepoIssues;
     return this.nextIssuesResult;
+  }
+
+  async getAuthenticatedUser(): Promise<User> {
+    this.calls.getAuthenticatedUser += 1;
+    if (this.errors.getAuthenticatedUser) throw this.errors.getAuthenticatedUser;
+    if (!this.nextUser) {
+      throw new Error('InMemoryGitHubRepository: chame setAuthenticatedUser antes');
+    }
+    return this.nextUser;
   }
 }
