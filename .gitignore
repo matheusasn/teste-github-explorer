@@ -42,8 +42,13 @@ yarn-error.*
 /ios
 /android
 
-# AI tooling (local only)
-.claude/
+# AI tooling
+# CLAUDE.md fica privado (contém regras internas, fora do repo)
+# .claude/agents/ é versionado (4 agentes-auditores documentados no ADR 008)
+# Demais conteúdos do .claude/ permanecem locais
+CLAUDE.md
+.claude/*
+!.claude/agents/
 
 # Coverage reports
 coverage/
