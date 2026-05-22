@@ -5,11 +5,11 @@ import { Button } from '@presentation/components/ds/Button';
 import { Skeleton } from '@presentation/components/ds/Skeleton';
 import { Text } from '@presentation/components/ds/Text';
 import { useTheme } from '@presentation/theme/ThemeContext';
-import type { RootStackParamList } from '@presentation/navigation/types';
+import type { ExploreStackParamList } from '@presentation/navigation/types';
 import { useRepoIssues } from './hooks/useRepoIssues';
 import { IssueItem } from './components/IssueItem';
 
-type RouteParams = RouteProp<RootStackParamList, 'Issues'>;
+type RouteParams = RouteProp<ExploreStackParamList, 'Issues'>;
 
 function IssuesSkeleton() {
   const { spacing } = useTheme();

@@ -2,35 +2,41 @@ import { createContext, useContext, useMemo, useState, type PropsWithChildren } 
 import { useColorScheme } from 'react-native';
 import { darkColors, lightColors, radius, spacing, typography, type ColorPalette } from './tokens';
 
-type ThemeMode = 'light' | 'dark';
+export type ThemePreference = 'system' | 'light' | 'dark';
+type EffectiveMode = 'light' | 'dark';
 
 interface ThemeContextValue {
-  mode: ThemeMode;
+  preference: ThemePreference;
+  mode: EffectiveMode;
   colors: ColorPalette;
   spacing: typeof spacing;
   radius: typeof radius;
   typography: typeof typography;
-  toggle: () => void;
-  setMode: (mode: ThemeMode) => void;
+  setPreference: (p: ThemePreference) => void;
 }
 
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 export function ThemeProvider({ children }: PropsWithChildren) {
-  const systemMode = useColorScheme();
-  const [mode, setMode] = useState<ThemeMode>(systemMode === 'dark' ? 'dark' : 'light');
+  const systemColorScheme = useColorScheme();
+  const [preference, setPreference] = useState<ThemePreference>('system');
+
+  const mode: EffectiveMode = useMemo(() => {
+    if (preference === 'system') return systemColorScheme === 'dark' ? 'dark' : 'light';
+    return preference;
+  }, [preference, systemColorScheme]);
 
   const value = useMemo<ThemeContextValue>(
     () => ({
+      preference,
       mode,
       colors: mode === 'dark' ? darkColors : lightColors,
       spacing,
       radius,
       typography,
-      toggle: () => setMode((m) => (m === 'light' ? 'dark' : 'light')),
-      setMode,
+      setPreference,
     }),
-    [mode],
+    [preference, mode],
   );
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;

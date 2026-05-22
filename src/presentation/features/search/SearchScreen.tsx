@@ -5,12 +5,12 @@ import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { Repo } from '@domain/entities/Repo';
 import { useTheme } from '@presentation/theme/ThemeContext';
-import type { RootStackParamList } from '@presentation/navigation/types';
+import type { ExploreStackParamList } from '@presentation/navigation/types';
 import { useSearchRepos } from './hooks/useSearchRepos';
 import { SearchBar } from './components/SearchBar';
 import { RepoList } from './components/RepoList';
 
-type NavProp = NativeStackNavigationProp<RootStackParamList, 'Search'>;
+type NavProp = NativeStackNavigationProp<ExploreStackParamList, 'Search'>;
 
 export function SearchScreen() {
   const { colors, spacing } = useTheme();

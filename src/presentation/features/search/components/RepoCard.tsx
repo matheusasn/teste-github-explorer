@@ -29,11 +29,12 @@ export function RepoCard({ repo, onPress }: RepoCardProps) {
             {repo.fullName}
           </Text>
 
-          {repo.description && (
+          {/* Reserva 2 linhas fixas pra descrição — mantém altura uniforme entre cards */}
+          <View style={{ minHeight: 40 }}>
             <Text variant="body" color="textMuted" numberOfLines={2}>
-              {repo.description}
+              {repo.description ?? 'Sem descrição'}
             </Text>
-          )}
+          </View>
 
           <View
             style={{

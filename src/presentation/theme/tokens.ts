@@ -47,9 +47,9 @@ export const darkColors: ColorPalette = {
   primary: '#2ea043',
   primaryContrast: '#ffffff',
 
-  background: '#0d1117', // fundo dark oficial do gh.com
-  surface: '#161b22',
-  surfaceMuted: '#1c2128',
+  background: '#000000', // preto puro estilo GitHub Mobile (mais imersivo no OLED)
+  surface: '#0d1117', // o que era background no web vira surface aqui
+  surfaceMuted: '#161b22',
 
   text: '#e6edf3',
   textMuted: '#8b949e',

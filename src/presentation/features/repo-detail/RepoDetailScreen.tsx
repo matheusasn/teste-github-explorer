@@ -7,13 +7,13 @@ import { Badge } from '@presentation/components/ds/Badge';
 import { Button } from '@presentation/components/ds/Button';
 import { Text } from '@presentation/components/ds/Text';
 import { useTheme } from '@presentation/theme/ThemeContext';
-import type { RootStackParamList } from '@presentation/navigation/types';
+import type { ExploreStackParamList } from '@presentation/navigation/types';
 import { useRepoDetails } from './hooks/useRepoDetails';
 import { StatCard } from './components/StatCard';
 import { RepoDetailSkeleton } from './components/RepoDetailSkeleton';
 
-type NavProp = NativeStackNavigationProp<RootStackParamList, 'RepoDetail'>;
-type RouteParams = RouteProp<RootStackParamList, 'RepoDetail'>;
+type NavProp = NativeStackNavigationProp<ExploreStackParamList, 'RepoDetail'>;
+type RouteParams = RouteProp<ExploreStackParamList, 'RepoDetail'>;
 
 function formatNumber(n: number): string {
   if (n >= 1000) return `${(n / 1000).toFixed(1)}k`;

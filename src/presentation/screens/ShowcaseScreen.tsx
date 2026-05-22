@@ -30,7 +30,7 @@ function Row({ children, gap = 8 }: { children: ReactNode; gap?: number }) {
 }
 
 export function ShowcaseScreen() {
-  const { colors, spacing, mode, toggle } = useTheme();
+  const { colors, spacing, mode } = useTheme();
 
   return (
     <ScrollView
@@ -40,8 +40,7 @@ export function ShowcaseScreen() {
       {/* Header */}
       <View style={{ gap: spacing.sm }}>
         <Text variant="display">Design System</Text>
-        <Text color="textMuted">Tema atual: {mode}</Text>
-        <Button label={mode === 'light' ? 'Mudar pra dark' : 'Mudar pra light'} onPress={toggle} />
+        <Text color="textMuted">Tema ativo: {mode}</Text>
       </View>
 
       {/* Typography */}
